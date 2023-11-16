@@ -1,0 +1,14 @@
+[
+  {
+      "model": "levelupapi.game",
+      "pk": 2,
+      "fields": {
+          "game_type_id": 1,
+          "title": "Dungeons & Dragons",
+          "maker": "Joe James",
+          "gamer_id": 1,
+          "number_of_players": 4,
+          "skill_level": 5
+      }
+  }
+]
