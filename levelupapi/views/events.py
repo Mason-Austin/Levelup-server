@@ -9,10 +9,10 @@ class EventView(ViewSet):
     """Level up Event view"""
     
     def retrieve(self, request, pk):
-        """Handle GET requests for single game type
+        """Handle GET requests for single event
 
         Returns:
-            Response -- JSON serialized game type
+            Response -- JSON serialized event
         """
         try:
           event = Event.objects.get(pk=pk)
@@ -20,11 +20,12 @@ class EventView(ViewSet):
           return Response(serializer.data)
         except Event.DoesNotExist as ex:
           return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+      
     def list(self, request):
-        """Handle GET requests for single game type
+        """Handle GET requests for single event type
 
         Returns:
-            Response -- JSON serialized game type
+            Response -- JSON serialized event type
         """
         events = Event.objects.all()
         game = request.query_params.get('game', None)
@@ -37,7 +38,7 @@ class EventView(ViewSet):
         """Handle POST operations
 
         Returns
-            Response -- JSON serialized game instance
+            Response -- JSON serialized event instance
         """
         organizer = Gamer.objects.get(uid=request.data["userId"])
         game = Game.objects.get(pk=request.data["gameId"])
@@ -51,6 +52,26 @@ class EventView(ViewSet):
         )
         serializer = EventSerializer(event)
         return Response(serializer.data)
+    
+    def update(self, request, pk):
+        """Handle PUT requests for a event
+
+        Returns:
+            Response -- Empty body with 204 status code
+        """
+
+        event = Event.objects.get(pk=pk)
+        event.description = request.data["description"]
+        event.date = request.data["date"]
+        event.time = request.data["time"]
+
+        organizer = Gamer.objects.get(pk=request.data["userId"])
+        event.organizer = organizer
+        game = Game.objects.get(pk=request.data["gameId"])
+        event.game = game
+        event.save()
+
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
 
 class EventSerializer(serializers.ModelSerializer):
     """JSON serializer for events"""
