@@ -26,8 +26,8 @@ router.register(r'events', EventView, 'event')
 router.register(r'games', GameView, 'game')
 
 urlpatterns = [
-    #path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('register', register_user),
     path('checkuser', check_user),
-    #path('', include(router.urls))
+    path('', include(router.urls))
 ]
