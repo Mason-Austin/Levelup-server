@@ -1,0 +1,24 @@
+[
+  {
+      "model": "levelupapi.event",
+      "pk": 1,
+      "fields": {
+          "game_id": 1,
+          "description": "A brutal PvP contest in World of Warcraft",
+          "date": "2023-12-5",
+          "time": "17:00:00",
+          "organizer_id": 1
+      }
+  },
+  {
+    "model": "levelupapi.event",
+    "pk": 2,
+    "fields": {
+      "game_id": 2,
+      "description": "Continuing the story of Fojrd and Jester",
+      "date": "2023-12-20",
+      "time": "13:00:00",
+      "organizer_id": 1
+    }
+  }
+]
